@@ -47,32 +47,43 @@ export const VideoModal: React.FC<VideoModalProps> = ({
           </button>
         </div>
 
-        {/* Video Player Mockup / Stream Frame */}
-        <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden group">
-          <img
-            src={episode?.thumbnail || '/images/studio-hero.jpg'}
-            alt="Video preview"
-            className="w-full h-full object-cover filter brightness-75 group-hover:scale-102 transition-transform duration-700"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
+        {/* Video Player Frame with Real YouTube Embed */}
+        <div className="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+          {episode?.youtubeId ? (
+            <iframe
+              className="w-full h-full border-0"
+              src={`https://www.youtube-nocookie.com/embed/${episode.youtubeId}?autoplay=1&rel=0`}
+              title={episode.title}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          ) : (
+            <div className="relative w-full h-full flex items-center justify-center group">
+              <img
+                src={episode?.thumbnail || '/images/studio-hero.jpg'}
+                alt="Video preview"
+                className="w-full h-full object-cover filter brightness-75 group-hover:scale-102 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
-          {/* Interactive Play / Live Center Action */}
-          <div className="relative z-10 flex flex-col items-center text-center p-6">
-            <a
-              href="https://www.youtube.com/@GeneracionPrivilegiada"
-              target="_blank"
-              rel="noreferrer"
-              className="w-20 h-20 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] flex items-center justify-center shadow-[0_0_40px_rgba(201,164,92,0.6)] transform hover:scale-105 transition-all duration-300 mb-4"
-            >
-              <Play className="w-8 h-8 fill-current ml-1" />
-            </a>
-            <span className="font-akira text-sm tracking-wider text-white uppercase drop-shadow-md">
-              REPRODUCIR EN YOUTUBE
-            </span>
-            <span className="text-xs text-[#AEB6C2] mt-1">
-              {episode?.duration ? `Duración: ${episode.duration}` : 'Transmisión en alta definición'}
-            </span>
-          </div>
+              <div className="relative z-10 flex flex-col items-center text-center p-6">
+                <a
+                  href="https://www.youtube.com/@GeneracionPrivilegiada/streams"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-20 h-20 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] flex items-center justify-center shadow-[0_0_40px_rgba(201,164,92,0.6)] transform hover:scale-105 transition-all duration-300 mb-4"
+                >
+                  <Play className="w-8 h-8 fill-current ml-1" />
+                </a>
+                <span className="font-akira text-sm tracking-wider text-white uppercase drop-shadow-md">
+                  VER EN YOUTUBE
+                </span>
+                <span className="text-xs text-[#AEB6C2] mt-1">
+                  {episode?.duration ? `Duración: ${episode.duration}` : 'Transmisión en vivo'}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer info inside modal */}
@@ -82,15 +93,15 @@ export const VideoModal: React.FC<VideoModalProps> = ({
               {episode?.title}
             </h4>
             <p className="text-xs text-[#AEB6C2]">
-              {episode?.description || 'Charla, reflexiones y streaming en vivo de Generación Privilegiada.'}
+              {episode?.description || 'Transmisión oficial de Generación Privilegiada.'}
             </p>
           </div>
 
           <a
-            href="https://www.youtube.com/@GeneracionPrivilegiada"
+            href={episode?.youtubeId ? `https://www.youtube.com/watch?v=${episode.youtubeId}` : "https://www.youtube.com/@GeneracionPrivilegiada/streams"}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-xs font-bold text-white tracking-wider uppercase border border-white/10 transition-colors whitespace-nowrap"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-xs font-bold text-[#070A0F] tracking-wider uppercase transition-colors whitespace-nowrap shadow-md"
           >
             <span>ABRIR EN YOUTUBE</span>
             <ExternalLink className="w-3.5 h-3.5" />

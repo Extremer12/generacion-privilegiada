@@ -7,15 +7,17 @@ export const GP_CONFIG = {
   subtext: "Streaming, conversaciones, entretenimiento y fe para una nueva generación.",
   nextLive: {
     isLiveNow: true,
-    dayName: "VIER",
-    dayNumber: "25",
+    dayName: "SÁB",
+    dayNumber: "26",
     month: "ABR",
     dateFormatted: "Todos los sábados • 19:30 hs",
-    title: "GENERACIÓN PRIVILEGIADA",
+    title: "CON MATE Y BIBLIA",
     tag: "STREAMING EN VIVO",
-    description: "Transmisión semanal oficial con Cristian Bordón, Victoria Medawar y equipo. Charlas sinceras, historias de vida y comunidad.",
+    description: "Transmisión semanal oficial con Cristian Bordón, Victoria Medawar y equipo. Charlas sinceras, testimonios reales y comunidad.",
     hostsCountExtra: "+2",
-    youtubeUrl: "https://www.youtube.com/@GeneracionPrivilegiada",
+    youtubeUrl: "https://www.youtube.com/@GeneracionPrivilegiada/streams",
+    youtubeId: "zwkn7POAC-Y",
+    thumbnail: "https://i.ytimg.com/vi/zwkn7POAC-Y/hqdefault.jpg"
   },
   socials: {
     youtube: "https://www.youtube.com/@GeneracionPrivilegiada",
@@ -79,45 +81,129 @@ export const HOSTS: Host[] = [
 ];
 
 export const LATEST_EPISODE: Episode = {
-  id: "ep-latest",
-  title: "¿CÓMO EMPEZAR DE CERO?",
-  date: "Episodio Destacado",
-  duration: "1:24:18",
-  description: "Conversamos sobre cómo levantarse cuando todo parece derrumbarse, reinventarse y encontrar un propósito firme en medio de la incertidumbre.",
-  thumbnail: "/images/episode-main.jpg",
-  program: "Generación Privilegiada Central",
-  views: "15.4K vistas"
+  id: "zwkn7POAC-Y",
+  youtubeId: "zwkn7POAC-Y",
+  title: "CON MATE Y BIBLIA / Generación Privilegiada #6",
+  date: "Última emisión",
+  duration: "1:19:21",
+  description: "Sexta emisión en vivo del espacio de debate, mates y reflexión junto a Cristian Bordón, Victoria Medawar y equipo. Charlas sinceras, fe práctica y comunidad.",
+  thumbnail: "https://i.ytimg.com/vi/zwkn7POAC-Y/hqdefault.jpg",
+  program: "Con Mate y Biblia",
+  views: "76 vistas"
 };
 
-export const RECENT_EPISODES: Episode[] = [
+export const ALL_CHANNEL_EPISODES: (Episode & { category: string })[] = [
   {
-    id: "ep-perdonar",
-    title: "¿SE PUEDE PERDONAR LO IMPERDONABLE?",
-    date: "Episodio #42",
-    duration: "1:18:45",
-    thumbnail: "/images/ep-sin-filtro.jpg",
-    program: "Debates en Vivo",
-    views: "12.8K vistas"
+    id: "zwkn7POAC-Y",
+    youtubeId: "zwkn7POAC-Y",
+    title: "CON MATE Y BIBLIA / Generación Privilegiada #6",
+    date: "Hace 2 semanas",
+    duration: "1:19:21",
+    description: "Sexta emisión en vivo de Con Mate y Biblia. Charlas sinceras, debate de la palabra, reflexiones y comunidad.",
+    thumbnail: "https://i.ytimg.com/vi/zwkn7POAC-Y/hqdefault.jpg",
+    program: "Con Mate y Biblia",
+    category: "mate-biblia",
+    views: "76 vistas"
   },
   {
-    id: "ep-mate-biblia",
-    title: "CON MATE Y BIBLIA",
-    date: "Especial GP",
-    duration: "1:05:20",
-    thumbnail: "/images/ep-batalla.jpg",
-    program: "Comunidad GP",
-    views: "21.5K vistas"
+    id: "8KInRU9Yz8M",
+    youtubeId: "8KInRU9Yz8M",
+    title: "DE TINIEBLAS A LA LUZ / Testimonios de vida #3",
+    date: "Hace 3 semanas",
+    duration: "1:02:03",
+    description: "Historias reales de transformación y fe. Testimonios que demuestran cómo la luz de Dios transforma las situaciones más difíciles.",
+    thumbnail: "https://i.ytimg.com/vi/8KInRU9Yz8M/hqdefault.jpg",
+    program: "Testimonios de Vida",
+    category: "testimonios",
+    views: "185 vistas"
   },
   {
-    id: "ep-decisiones",
-    title: "DECISIONES QUE CAMBIAN TODO",
-    date: "Episodio #40",
-    duration: "1:12:30",
-    thumbnail: "/images/ep-unacosamas.jpg",
-    program: "Reflexiones GP",
-    views: "16.1K vistas"
+    id: "myPLwL4Z6GY",
+    youtubeId: "myPLwL4Z6GY",
+    title: "CON MATE Y BIBLIA / Generación Privilegiada #5",
+    date: "Hace 1 mes",
+    duration: "41:33",
+    description: "Quinta edición con reflexiones y diálogo abierto sobre la vida cotidiana, dudas de los jóvenes y la guía bíblica.",
+    thumbnail: "https://i.ytimg.com/vi/myPLwL4Z6GY/hqdefault.jpg",
+    program: "Con Mate y Biblia",
+    category: "mate-biblia",
+    views: "54 vistas"
+  },
+  {
+    id: "7u2njzJ1l7A",
+    youtubeId: "7u2njzJ1l7A",
+    title: "CON MATE Y BIBLIA / Generación Privilegiada #5 (Parte 2)",
+    date: "Hace 1 mes",
+    duration: "22:41",
+    description: "Segunda parte de la emisión #5 con respuestas a la comunidad y debate en vivo en el chat.",
+    thumbnail: "https://i.ytimg.com/vi/7u2njzJ1l7A/hqdefault.jpg",
+    program: "Con Mate y Biblia",
+    category: "mate-biblia",
+    views: "38 vistas"
+  },
+  {
+    id: "_IQ1zjjOMnM",
+    youtubeId: "_IQ1zjjOMnM",
+    title: "CON MATE Y BIBLIA / Generación Privilegiada #4",
+    date: "Hace 1 mes",
+    duration: "54:55",
+    description: "Abordando desafíos de la juventud actual, cómo pararse frente a la presión social y vivir con propósito.",
+    thumbnail: "https://i.ytimg.com/vi/_IQ1zjjOMnM/hqdefault.jpg",
+    program: "Con Mate y Biblia",
+    category: "mate-biblia",
+    views: "49 vistas"
+  },
+  {
+    id: "TJhxlEbktCI",
+    youtubeId: "TJhxlEbktCI",
+    title: "CRISTIANOS DE PAPEL / Generación Privilegiada #30",
+    date: "Hace 2 meses",
+    duration: "43:13",
+    description: "¿Qué significa vivir una fe genuina frente a las apariencias y la superficialidad? Programa especial #30.",
+    thumbnail: "https://i.ytimg.com/vi/TJhxlEbktCI/hqdefault.jpg",
+    program: "Especiales GP",
+    category: "especiales",
+    views: "67 vistas"
+  },
+  {
+    id: "gROF0MsHqeA",
+    youtubeId: "gROF0MsHqeA",
+    title: "DIOS ME SANÓ, TESTIMONIO DE PASTOR / Testimonios de vida #2",
+    date: "Hace 2 meses",
+    duration: "1:13:44",
+    description: "Poderoso relato de sanidad, restauración y fe inquebrantable en el segmento Testimonios de Vida.",
+    thumbnail: "https://i.ytimg.com/vi/gROF0MsHqeA/hqdefault.jpg",
+    program: "Testimonios de Vida",
+    category: "testimonios",
+    views: "142 vistas"
+  },
+  {
+    id: "-gghIi5oeTs",
+    youtubeId: "-gghIi5oeTs",
+    title: "CON MATE Y BIBLIA / Emisión Especial Extendida",
+    date: "Hace 2 meses",
+    duration: "1:43:45",
+    description: "Transmisión completa con interacción directa con la audiencia en el chat y reflexiones compartidas.",
+    thumbnail: "https://i.ytimg.com/vi/-gghIi5oeTs/hqdefault.jpg",
+    program: "Con Mate y Biblia",
+    category: "mate-biblia",
+    views: "88 vistas"
+  },
+  {
+    id: "qhDp7PPQDeM",
+    youtubeId: "qhDp7PPQDeM",
+    title: "HUMILDAD Y SERVICIO / Generación Privilegiada #29",
+    date: "Hace 2 meses",
+    duration: "1:06:06",
+    description: "Reflexión profunda sobre el liderazgo de servicio, el amor al prójimo y la humildad en el día a día.",
+    thumbnail: "https://i.ytimg.com/vi/qhDp7PPQDeM/hqdefault.jpg",
+    program: "Especiales GP",
+    category: "especiales",
+    views: "95 vistas"
   }
 ];
+
+export const RECENT_EPISODES: Episode[] = ALL_CHANNEL_EPISODES.slice(1, 4);
 
 export const RANKING_2026: RankingUser[] = [
   {

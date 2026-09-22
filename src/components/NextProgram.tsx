@@ -27,7 +27,7 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
             {/* Thumbnail Preview with Live Badge */}
             <div className="relative w-full rounded-xl overflow-hidden aspect-video group cursor-pointer border border-white/[0.08]" onClick={onWatchLive}>
               <img
-                src="/images/studio-hero.jpg"
+                src={nextLive.thumbnail || "/images/studio-hero.jpg"}
                 alt={nextLive.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
