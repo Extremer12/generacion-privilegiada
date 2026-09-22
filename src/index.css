@@ -123,15 +123,8 @@
   overflow: visible;
 }
 
-/* Letras GP */
-.gp-letter {
-  font-family: "Akira Expanded", Arial, sans-serif;
-  font-size: 64px;
-  font-weight: 900;
-  letter-spacing: -5px;
-
-  stroke-width: 2.5;
-
+/* Trazados vectoriales GP */
+.gp-path {
   stroke-dasharray: 100;
   stroke-dashoffset: 100;
 

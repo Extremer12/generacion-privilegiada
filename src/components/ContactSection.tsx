@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Send, CheckCircle2, ShieldCheck } from 'lucide-react';
 
 export const ContactSection: React.FC = () => {
-  const [category, setCategory] = useState<'oracion' | 'contenido' | 'patrocinio' | 'otro'>('oracion');
+  const [category, setCategory] = useState<'oracion' | 'contenido' | 'general' | 'otro'>('oracion');
   const [isConfidential, setIsConfidential] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -66,8 +66,8 @@ export const ContactSection: React.FC = () => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[
                   { id: 'oracion', label: 'PEDIDO DE ORACIÓN' },
-                  { id: 'contenido', label: 'PROPUESTA' },
-                  { id: 'patrocinio', label: 'PATROCINADORES' },
+                  { id: 'contenido', label: 'PROPUESTA DE TEMA' },
+                  { id: 'general', label: 'MENSAJE AL EQUIPO' },
                   { id: 'otro', label: 'OTRO' },
                 ].map((item) => (
                   <button

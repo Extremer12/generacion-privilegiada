@@ -18,10 +18,10 @@ export const ScheduleModal: React.FC<ScheduleModalProps> = ({
   const shows = [
     {
       title: "GENERACIÓN PRIVILEGIADA CENTRAL",
-      day: "VIERNES",
-      time: "21:00 HS",
-      tag: "STREAMING PRINCIPAL",
-      description: "La mesa central de GP. Conversaciones profundas, entrevistas a invitados especiales, música en vivo y la palabra compartida.",
+      day: "SÁBADOS",
+      time: "19:30 HS",
+      tag: "STREAMING OFICIAL",
+      description: "Transmisión principal semanal con Cristian Bordón, Victoria Medawar y equipo. Conversaciones profundas, fe, historias reales y comunidad sin formalismos.",
       hosts: [HOSTS[0], HOSTS[1], HOSTS[2], HOSTS[3]],
       image: "/images/studio-hero.jpg",
       isLiveSoon: true,

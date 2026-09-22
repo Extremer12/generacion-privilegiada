@@ -10,11 +10,11 @@ export const GP_CONFIG = {
     dayName: "VIER",
     dayNumber: "25",
     month: "ABR",
-    dateFormatted: "25 de abril • 21:00 hs",
+    dateFormatted: "Todos los sábados • 19:30 hs",
     title: "GENERACIÓN PRIVILEGIADA",
     tag: "STREAMING EN VIVO",
-    description: "Un programa donde la conversación, la música y la palabra se encuentran.",
-    hostsCountExtra: "+1",
+    description: "Transmisión semanal oficial con Cristian Bordón, Victoria Medawar y equipo. Charlas sinceras, historias de vida y comunidad.",
+    hostsCountExtra: "+2",
     youtubeUrl: "https://www.youtube.com/@GeneracionPrivilegiada",
   },
   socials: {
@@ -80,42 +80,42 @@ export const HOSTS: Host[] = [
 
 export const LATEST_EPISODE: Episode = {
   id: "ep-latest",
-  title: "EL INVITADO ESPECIAL",
-  date: "18 de abril de 2025",
-  duration: "1:28:45",
-  description: "Una charla que no te podés perder. Conversamos sobre fe, sueños y lo que viene.",
+  title: "¿CÓMO EMPEZAR DE CERO?",
+  date: "Episodio Destacado",
+  duration: "1:24:18",
+  description: "Conversamos sobre cómo levantarse cuando todo parece derrumbarse, reinventarse y encontrar un propósito firme en medio de la incertidumbre.",
   thumbnail: "/images/episode-main.jpg",
   program: "Generación Privilegiada Central",
-  views: "14.2K vistas"
+  views: "15.4K vistas"
 };
 
 export const RECENT_EPISODES: Episode[] = [
   {
-    id: "ep-sin-filtro",
-    title: "SIN FILTRO",
-    date: "11 abr 2025",
-    duration: "1:15:32",
+    id: "ep-perdonar",
+    title: "¿SE PUEDE PERDONAR LO IMPERDONABLE?",
+    date: "Episodio #42",
+    duration: "1:18:45",
     thumbnail: "/images/ep-sin-filtro.jpg",
-    program: "Debates GP",
-    views: "9.8K vistas"
+    program: "Debates en Vivo",
+    views: "12.8K vistas"
   },
   {
-    id: "ep-batalla-biblica",
-    title: "BATALLA BÍBLICA",
-    date: "04 abr 2025",
-    duration: "1:22:18",
+    id: "ep-mate-biblia",
+    title: "CON MATE Y BIBLIA",
+    date: "Especial GP",
+    duration: "1:05:20",
     thumbnail: "/images/ep-batalla.jpg",
-    program: "Juegos en Vivo",
-    views: "18.5K vistas"
+    program: "Comunidad GP",
+    views: "21.5K vistas"
   },
   {
-    id: "ep-una-cosa-mas",
-    title: "UNA COSA MÁS",
-    date: "28 mar 2025",
-    duration: "1:08:45",
+    id: "ep-decisiones",
+    title: "DECISIONES QUE CAMBIAN TODO",
+    date: "Episodio #40",
+    duration: "1:12:30",
     thumbnail: "/images/ep-unacosamas.jpg",
     program: "Reflexiones GP",
-    views: "11.1K vistas"
+    views: "16.1K vistas"
   }
 ];
 

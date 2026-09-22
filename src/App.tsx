@@ -4,6 +4,7 @@ import { Hero } from './components/Hero';
 import { NextProgram } from './components/NextProgram';
 import { LatestEpisode } from './components/LatestEpisode';
 import { HostsSection } from './components/HostsSection';
+import { SponsorsSection } from './components/SponsorsSection';
 import { RankingAndSupport } from './components/RankingAndSupport';
 import { AboutSection } from './components/AboutSection';
 import { ContactSection } from './components/ContactSection';
@@ -80,7 +81,10 @@ export const App: React.FC = () => {
         onViewAllGoals={() => setSupportModalOpen(true)}
       />
 
-      {/* 7. Nosotros / Manifiesto */}
+      {/* 7. Patrocinadores & Alianzas Comerciales */}
+      <SponsorsSection />
+
+      {/* 8. Nosotros / Manifiesto */}
       <AboutSection />
 
       {/* 8. Contacto / Pedidos de Oración */}
