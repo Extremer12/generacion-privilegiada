@@ -1,0 +1,247 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Akira Expanded';
+  src: url('/fonts/akira-expanded.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --color-gp-bg: #070A0F;
+    --color-gp-bg-secondary: #0C121B;
+    --color-gp-surface: #111A25;
+    --color-gp-surface-2: #151F2C;
+    --color-gp-gold: #C9A45C;
+    --color-gp-gold-light: #E4C77A;
+  }
+
+  body {
+    background-color: #070A0F;
+    color: #F4F5F7;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom subtle scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #070A0F;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1c2738;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A45C;
+  }
+}
+
+@layer utilities {
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #F4F5F7 0%, #E4C77A 45%, #C9A45C 85%, #9A7730 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-gold-pure {
+    background: linear-gradient(135deg, #FFF0BA 0%, #E4C77A 40%, #C9A45C 80%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #E4C77A 0%, #C9A45C 70%, #B38E46 100%);
+  }
+
+  .border-subtle {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .border-gold-subtle {
+    border-color: rgba(201, 164, 92, 0.35);
+  }
+
+  .glow-gold-sm {
+    box-shadow: 0 0 15px rgba(201, 164, 92, 0.25);
+  }
+
+  .glow-gold {
+    box-shadow: 0 0 30px rgba(201, 164, 92, 0.3);
+  }
+
+  .glow-live {
+    box-shadow: 0 0 12px rgba(229, 57, 53, 0.7);
+  }
+}
+
+/* Film noise texture overlay for cinematic studio feel */
+.cinematic-vignette {
+  background: radial-gradient(circle at 50% 30%, rgba(7, 10, 15, 0.1) 0%, rgba(7, 10, 15, 0.85) 75%, #070A0F 100%);
+}
+
+.hero-gradient-overlay {
+  background: linear-gradient(
+    to right,
+    rgba(7, 10, 15, 0.96) 0%,
+    rgba(7, 10, 15, 0.85) 35%,
+    rgba(7, 10, 15, 0.35) 65%,
+    rgba(7, 10, 15, 0.75) 100%
+  );
+}
+
+.hero-bottom-fade {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(7, 10, 15, 0.4) 50%,
+    #070A0F 100%
+  );
+}
+
+/* =========================================================
+   GP OFFICIAL LOADER ANIMATION
+   ========================================================= */
+.gp-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #070A0F;
+}
+
+.gp-loader-svg {
+  width: 180px;
+  height: auto;
+  overflow: visible;
+}
+
+/* Letras GP */
+.gp-letter {
+  font-family: "Akira Expanded", Arial, sans-serif;
+  font-size: 64px;
+  font-weight: 900;
+  letter-spacing: -5px;
+
+  stroke-width: 2.5;
+
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+
+  animation:
+    gpDraw 2.2s cubic-bezier(.65,0,.35,1) infinite,
+    gpGlow 2.2s ease-in-out infinite;
+}
+
+/* G ligeramente adelantada */
+.gp-g {
+  animation-delay: 0s;
+}
+
+/* P aparece después */
+.gp-p {
+  animation-delay: .15s;
+}
+
+/* Corona */
+.gp-crown {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+
+  animation:
+    crownDraw 2.2s cubic-bezier(.65,0,.35,1) infinite;
+
+  transform-origin: center;
+}
+
+/* Animación de dibujo de letras */
+@keyframes gpDraw {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0.3;
+  }
+  35% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0.3;
+  }
+}
+
+/* Animación de corona */
+@keyframes crownDraw {
+  0% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  25% {
+    stroke-dashoffset: 100;
+    opacity: 0;
+  }
+  45% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  75% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: -100;
+    opacity: 0;
+  }
+}
+
+/* Brillo sutil */
+@keyframes gpGlow {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(201,164,92,0));
+  }
+  45% {
+    filter:
+      drop-shadow(0 0 5px rgba(201,164,92,.35))
+      drop-shadow(0 0 12px rgba(201,164,92,.15));
+  }
+  70% {
+    filter:
+      drop-shadow(0 0 8px rgba(201,164,92,.45))
+      drop-shadow(0 0 18px rgba(201,164,92,.2));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 rgba(201,164,92,0));
+  }
+}
+
+/* Texto que aparece después con sutil fade */
+.animate-fade-in-delayed {
+  animation: fadeInDelayed 2.2s ease-in-out infinite;
+}
+
+@keyframes fadeInDelayed {
+  0%, 35% {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  55%, 85% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+}
+
