@@ -1,6 +1,7 @@
 import React from 'react';
 import { Calendar, Play, ArrowRight, Clock, Eye } from 'lucide-react';
 import { useAdmin } from '../context/AdminContext';
+import { LATEST_EPISODE, GP_CONFIG } from '../data/gpData';
 
 interface NextProgramProps {
   onWatchLive: () => void;
@@ -8,7 +9,9 @@ interface NextProgramProps {
 }
 
 export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSchedule }) => {
-  const { latestBroadcast, hosts } = useAdmin();
+  const { hosts } = useAdmin();
+  const latest = LATEST_EPISODE;
+  const nextConfig = GP_CONFIG.nextLive;
 
   return (
     <section id="ultimo-programa" className="relative z-20 -mt-8 sm:-mt-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,8 +30,8 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
             {/* Thumbnail Preview with Live Badge */}
             <div className="relative w-full rounded-xl overflow-hidden aspect-video group cursor-pointer border border-white/[0.08]" onClick={onWatchLive}>
               <img
-                src={latestBroadcast.thumbnail || "https://i.ytimg.com/vi/zwkn7POAC-Y/hqdefault.jpg"}
-                alt={latestBroadcast.title}
+                src={latest.thumbnail}
+                alt={latest.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#070A0F]/80 via-transparent to-black/30" />
@@ -36,7 +39,7 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
               {/* Badge inside thumbnail */}
               <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#C9A45C] text-[#070A0F] text-[10px] font-black tracking-wider uppercase shadow-lg">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#070A0F] animate-ping" />
-                <span>{latestBroadcast.tag || "ÚLTIMA TRANSMISIÓN"}</span>
+                <span>ÚLTIMA TRANSMISIÓN</span>
               </div>
 
               {/* Play Overlay */}
@@ -47,10 +50,10 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
               </div>
 
               {/* Duration badge */}
-              {latestBroadcast.duration && (
+              {latest.duration && (
                 <div className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded bg-black/85 backdrop-blur-sm text-[10px] font-mono text-white/90 flex items-center gap-1 border border-white/10">
                   <Clock className="w-2.5 h-2.5 text-[#C9A45C]" />
-                  <span>{latestBroadcast.duration}</span>
+                  <span>{latest.duration}</span>
                 </div>
               )}
             </div>
@@ -60,31 +63,31 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
           <div className="lg:col-span-5 flex flex-col justify-center">
             <div className="flex flex-wrap items-center gap-2.5 mb-1.5">
               <h3 className="font-akira text-lg sm:text-xl font-black tracking-wide text-[#F4F5F7]">
-                {latestBroadcast.title}
+                {latest.title}
               </h3>
               <span className="text-[9px] font-bold px-2 py-0.5 rounded bg-[#C9A45C]/15 border border-[#C9A45C]/30 text-[#E4C77A] tracking-wider uppercase">
-                {latestBroadcast.tag}
+                {latest.program || nextConfig.tag}
               </span>
             </div>
 
             <div className="flex flex-wrap items-center gap-3 text-xs font-semibold text-[#C9A45C] mb-2.5">
               <span className="flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5" />
-                <span>{latestBroadcast.dateFormatted}</span>
+                <span>{nextConfig.dateFormatted}</span>
               </span>
-              {latestBroadcast.views && (
+              {latest.views && (
                 <>
                   <span className="text-white/20">•</span>
                   <span className="flex items-center gap-1 text-[#AEB6C2] font-mono text-[11px]">
                     <Eye className="w-3 h-3 text-[#C9A45C]" />
-                    <span>{latestBroadcast.views}</span>
+                    <span>{latest.views}</span>
                   </span>
                 </>
               )}
             </div>
 
             <p className="text-xs sm:text-sm text-[#AEB6C2] leading-relaxed mb-4 line-clamp-2">
-              {latestBroadcast.description}
+              {latest.description}
             </p>
 
             {/* Conductores Avatars + Action */}

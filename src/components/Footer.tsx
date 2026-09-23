@@ -1,11 +1,8 @@
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
 import { GpLogo } from './GpLogo';
 import { GP_CONFIG } from '../data/gpData';
-import { useAdmin } from '../context/AdminContext';
 
 export const Footer: React.FC = () => {
-  const { setIsAdminOpen } = useAdmin();
   return (
     <footer className="border-t border-white/[0.08] bg-[#070A0F] py-12 mt-12">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -63,22 +60,11 @@ export const Footer: React.FC = () => {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#AEB6C2]/50 gap-4">
           <p>© {new Date().getFullYear()} Generación Privilegiada. Todos los derechos reservados.</p>
           
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => setIsAdminOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/[0.03] hover:bg-[#C9A45C]/15 border border-white/[0.08] hover:border-[#C9A45C]/40 text-[#AEB6C2] hover:text-[#C9A45C] text-[10px] font-bold uppercase tracking-wider transition-all duration-200"
-              title="Abrir Panel Administrativo (Ctrl+Shift+A)"
-            >
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>PANEL ADMIN</span>
-            </button>
-
-            <p className="flex items-center gap-1.5">
-              <span>Diseño oficial y transmisión digital</span>
-              <span className="w-1 h-1 rounded-full bg-[#C9A45C]" />
-              <span>Buenos Aires</span>
-            </p>
-          </div>
+          <p className="flex items-center gap-1.5">
+            <span>Diseño oficial y transmisión digital</span>
+            <span className="w-1 h-1 rounded-full bg-[#C9A45C]" />
+            <span>Buenos Aires</span>
+          </p>
         </div>
 
       </div>

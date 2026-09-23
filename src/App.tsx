@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { NextProgram } from './components/NextProgram';
@@ -14,13 +14,52 @@ import { SupportModal } from './components/SupportModal';
 import { RankingModal } from './components/RankingModal';
 import { ScheduleModal } from './components/ScheduleModal';
 import { GpLoader } from './components/GpLoader';
-import { AdminPanelModal } from './components/admin/AdminPanelModal';
-import { AdminProvider, useAdmin } from './context/AdminContext';
+import { AdminPage } from './components/admin/AdminPage';
+import { AdminProvider } from './context/AdminContext';
+import { LATEST_EPISODE } from './data/gpData';
 import { Episode } from './types';
 
-const AppContent: React.FC = () => {
-  const { latestBroadcast } = useAdmin();
+const checkIsAdminRoute = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  return (
+    path === '/admin' ||
+    path.startsWith('/admin/') ||
+    hash === '#/admin' ||
+    hash === '#admin' ||
+    hash.startsWith('#/admin')
+  );
+};
 
+const AppContent: React.FC = () => {
+  const [isAdminRoute, setIsAdminRoute] = useState<boolean>(checkIsAdminRoute);
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setIsAdminRoute(checkIsAdminRoute());
+    };
+
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
+    };
+  }, []);
+
+  const handleBackToSite = () => {
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+    }
+    if (window.location.hash) {
+      window.history.pushState({}, '', window.location.pathname);
+    }
+    setIsAdminRoute(false);
+  };
+
+  // Modals state for public website
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
   const [isLiveStream, setIsLiveStream] = useState(false);
@@ -30,18 +69,7 @@ const AppContent: React.FC = () => {
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
 
   const handleOpenLive = () => {
-    const liveEp: Episode = {
-      id: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
-      youtubeId: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
-      title: latestBroadcast.title,
-      date: latestBroadcast.dateFormatted,
-      duration: latestBroadcast.duration,
-      description: latestBroadcast.description,
-      thumbnail: latestBroadcast.thumbnail,
-      program: latestBroadcast.tag,
-      views: latestBroadcast.views,
-    };
-    setSelectedEpisode(liveEp);
+    setSelectedEpisode(LATEST_EPISODE);
     setIsLiveStream(true);
     setVideoModalOpen(true);
   };
@@ -53,22 +81,17 @@ const AppContent: React.FC = () => {
   };
 
   const handleWatchLatest = () => {
-    const latestEp: Episode = {
-      id: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
-      youtubeId: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
-      title: latestBroadcast.title,
-      date: latestBroadcast.dateFormatted,
-      duration: latestBroadcast.duration,
-      description: latestBroadcast.description,
-      thumbnail: latestBroadcast.thumbnail,
-      program: latestBroadcast.tag,
-      views: latestBroadcast.views,
-    };
-    setSelectedEpisode(latestEp);
+    setSelectedEpisode(LATEST_EPISODE);
     setIsLiveStream(false);
     setVideoModalOpen(true);
   };
 
+  // If in Admin route, render Fullscreen Admin Dashboard / Login
+  if (isAdminRoute) {
+    return <AdminPage onBackToSite={handleBackToSite} />;
+  }
+
+  // Otherwise, render Public Website
   return (
     <div className="min-h-screen bg-[#070A0F] text-[#F4F5F7] font-sans antialiased overflow-x-hidden">
       {/* 0. Brand SVG Drawing Loader */}
@@ -141,10 +164,6 @@ const AppContent: React.FC = () => {
         onClose={() => setScheduleModalOpen(false)}
         onWatchLive={handleOpenLive}
       />
-
-      {/* Admin Panel Modal */}
-      <AdminPanelModal />
-
     </div>
   );
 };

@@ -1,11 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Host, RankingUser, SupportGoal } from '../types';
 import {
   HOSTS as DEFAULT_HOSTS,
   RANKING_2026 as DEFAULT_RANKING,
   SUPPORT_GOALS as DEFAULT_GOALS,
   GP_CONFIG as DEFAULT_CONFIG,
-  LATEST_EPISODE as DEFAULT_LATEST
 } from '../data/gpData';
 
 export interface AboutConfig {
@@ -20,17 +19,6 @@ export interface AboutConfig {
   pillar1Desc: string;
   pillar2Title: string;
   pillar2Desc: string;
-}
-
-export interface LatestBroadcastConfig {
-  title: string;
-  tag: string;
-  dateFormatted: string;
-  duration: string;
-  views: string;
-  description: string;
-  youtubeId: string;
-  thumbnail: string;
 }
 
 export interface FundingConfig {
@@ -55,32 +43,17 @@ export const DEFAULT_ABOUT: AboutConfig = {
   pillar2Desc: "La audiencia no es espectadora pasiva: participa, suma puntos en vivo y co-construye cada transmisión.",
 };
 
-export const DEFAULT_LATEST_BROADCAST: LatestBroadcastConfig = {
-  title: DEFAULT_CONFIG.nextLive.title || "CON MATE Y BIBLIA / GP #6",
-  tag: "ÚLTIMA TRANSMISIÓN",
-  dateFormatted: DEFAULT_CONFIG.nextLive.dateFormatted || "Sábados • 19:30 hs",
-  duration: DEFAULT_LATEST.duration || "1:19:21",
-  views: DEFAULT_LATEST.views || "76 vistas",
-  description: DEFAULT_CONFIG.nextLive.description || "Transmisión en vivo oficial con Cristian Bordón, Victoria Medawar y equipo. Charlas sinceras, testimonios reales y comunidad.",
-  youtubeId: DEFAULT_CONFIG.nextLive.youtubeId || "zwkn7POAC-Y",
-  thumbnail: DEFAULT_CONFIG.nextLive.thumbnail || "https://i.ytimg.com/vi/zwkn7POAC-Y/hqdefault.jpg",
-};
-
 interface AdminContextType {
-  isAdminOpen: boolean;
-  setIsAdminOpen: (open: boolean) => void;
   hosts: Host[];
   ranking: RankingUser[];
   goals: SupportGoal[];
   funding: FundingConfig;
   about: AboutConfig;
-  latestBroadcast: LatestBroadcastConfig;
   updateHosts: (hosts: Host[]) => void;
   updateRanking: (ranking: RankingUser[]) => void;
   updateGoals: (goals: SupportGoal[]) => void;
   updateFunding: (current: number, target: number) => void;
   updateAbout: (about: Partial<AboutConfig>) => void;
-  updateLatestBroadcast: (data: Partial<LatestBroadcastConfig>) => void;
   resetAllToDefaults: () => void;
 }
 
@@ -89,9 +62,6 @@ const STORAGE_KEY = 'gp_admin_data_v1';
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
 
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
-
-  // Load initial state from localStorage or fallback to defaults
   const [hosts, setHosts] = useState<Host[]>(() => {
     try {
       const saved = localStorage.getItem(`${STORAGE_KEY}_hosts`);
@@ -146,27 +116,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   });
 
-  const [latestBroadcast, setLatestBroadcast] = useState<LatestBroadcastConfig>(() => {
-    try {
-      const saved = localStorage.getItem(`${STORAGE_KEY}_broadcast`);
-      return saved ? JSON.parse(saved) : DEFAULT_LATEST_BROADCAST;
-    } catch {
-      return DEFAULT_LATEST_BROADCAST;
-    }
-  });
-
-  // Listen to keyboard shortcut Ctrl+Shift+A to toggle admin panel
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
-        e.preventDefault();
-        setIsAdminOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
   const updateHosts = (newHosts: Host[]) => {
     setHosts(newHosts);
     localStorage.setItem(`${STORAGE_KEY}_hosts`, JSON.stringify(newHosts));
@@ -202,12 +151,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem(`${STORAGE_KEY}_about`, JSON.stringify(newAbout));
   };
 
-  const updateLatestBroadcast = (partialBroadcast: Partial<LatestBroadcastConfig>) => {
-    const newBroadcast = { ...latestBroadcast, ...partialBroadcast };
-    setLatestBroadcast(newBroadcast);
-    localStorage.setItem(`${STORAGE_KEY}_broadcast`, JSON.stringify(newBroadcast));
-  };
-
   const resetAllToDefaults = () => {
     setHosts(DEFAULT_HOSTS);
     setRanking(DEFAULT_RANKING);
@@ -222,33 +165,27 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       formattedTarget: `$${targ.toLocaleString('es-AR')}`,
     });
     setAbout(DEFAULT_ABOUT);
-    setLatestBroadcast(DEFAULT_LATEST_BROADCAST);
 
     localStorage.removeItem(`${STORAGE_KEY}_hosts`);
     localStorage.removeItem(`${STORAGE_KEY}_ranking`);
     localStorage.removeItem(`${STORAGE_KEY}_goals`);
     localStorage.removeItem(`${STORAGE_KEY}_funding`);
     localStorage.removeItem(`${STORAGE_KEY}_about`);
-    localStorage.removeItem(`${STORAGE_KEY}_broadcast`);
   };
 
   return (
     <AdminContext.Provider
       value={{
-        isAdminOpen,
-        setIsAdminOpen,
         hosts,
         ranking,
         goals,
         funding,
         about,
-        latestBroadcast,
         updateHosts,
         updateRanking,
         updateGoals,
         updateFunding,
         updateAbout,
-        updateLatestBroadcast,
         resetAllToDefaults,
       }}
     >
