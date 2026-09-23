@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Heart, Check, Copy } from 'lucide-react';
-import { SUPPORT_GOALS } from '../data/gpData';
+import { useAdmin } from '../context/AdminContext';
 
 interface SupportModalProps {
   isOpen: boolean;
@@ -8,6 +8,7 @@ interface SupportModalProps {
 }
 
 export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) => {
+  const { goals } = useAdmin();
   const [copiedField, setCopiedField] = useState<string | null>(null);
   const [selectedTier, setSelectedTier] = useState<number | null>(5000);
 
@@ -62,7 +63,7 @@ export const SupportModal: React.FC<SupportModalProps> = ({ isOpen, onClose }) =
               OBJETIVOS EN CURSO
             </span>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
-              {SUPPORT_GOALS.map((goal, idx) => (
+              {goals.map((goal, idx) => (
                 <div key={idx} className="p-3 rounded-xl bg-[#111A25]/50 border border-white/[0.04]">
                   <span className="font-semibold text-xs text-white block">{goal.title}</span>
                   <span className="text-[10px] text-[#AEB6C2]/70 leading-tight block mt-0.5">{goal.description}</span>

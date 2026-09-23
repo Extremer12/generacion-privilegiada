@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { HOSTS } from '../data/gpData';
+import { useAdmin } from '../context/AdminContext';
 import { GpLogo } from './GpLogo';
 
 interface HostsSectionProps {
@@ -8,6 +8,7 @@ interface HostsSectionProps {
 }
 
 export const HostsSection: React.FC<HostsSectionProps> = ({ onViewAll }) => {
+  const { hosts } = useAdmin();
   return (
     <section id="conductores" className="relative py-16 sm:py-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
@@ -28,8 +29,8 @@ export const HostsSection: React.FC<HostsSectionProps> = ({ onViewAll }) => {
       {/* 5-Column Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
         
-        {/* 4 Host Cards */}
-        {HOSTS.map((host) => (
+        {/* Host Cards */}
+        {hosts.map((host) => (
           <div
             key={host.id}
             className="group relative rounded-2xl overflow-hidden aspect-[3/4.2] border border-white/[0.08] hover:border-[#C9A45C]/40 transition-all duration-500 bg-[#0C121B] shadow-xl flex flex-col justify-end p-5"

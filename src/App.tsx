@@ -14,10 +14,13 @@ import { SupportModal } from './components/SupportModal';
 import { RankingModal } from './components/RankingModal';
 import { ScheduleModal } from './components/ScheduleModal';
 import { GpLoader } from './components/GpLoader';
+import { AdminPanelModal } from './components/admin/AdminPanelModal';
+import { AdminProvider, useAdmin } from './context/AdminContext';
 import { Episode } from './types';
-import { LATEST_EPISODE } from './data/gpData';
 
-export const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { latestBroadcast } = useAdmin();
+
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null);
   const [isLiveStream, setIsLiveStream] = useState(false);
@@ -27,7 +30,18 @@ export const App: React.FC = () => {
   const [scheduleModalOpen, setScheduleModalOpen] = useState(false);
 
   const handleOpenLive = () => {
-    setSelectedEpisode(LATEST_EPISODE);
+    const liveEp: Episode = {
+      id: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
+      youtubeId: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
+      title: latestBroadcast.title,
+      date: latestBroadcast.dateFormatted,
+      duration: latestBroadcast.duration,
+      description: latestBroadcast.description,
+      thumbnail: latestBroadcast.thumbnail,
+      program: latestBroadcast.tag,
+      views: latestBroadcast.views,
+    };
+    setSelectedEpisode(liveEp);
     setIsLiveStream(true);
     setVideoModalOpen(true);
   };
@@ -39,7 +53,18 @@ export const App: React.FC = () => {
   };
 
   const handleWatchLatest = () => {
-    setSelectedEpisode(LATEST_EPISODE);
+    const latestEp: Episode = {
+      id: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
+      youtubeId: latestBroadcast.youtubeId || 'zwkn7POAC-Y',
+      title: latestBroadcast.title,
+      date: latestBroadcast.dateFormatted,
+      duration: latestBroadcast.duration,
+      description: latestBroadcast.description,
+      thumbnail: latestBroadcast.thumbnail,
+      program: latestBroadcast.tag,
+      views: latestBroadcast.views,
+    };
+    setSelectedEpisode(latestEp);
     setIsLiveStream(false);
     setVideoModalOpen(true);
   };
@@ -58,13 +83,13 @@ export const App: React.FC = () => {
         onViewSchedule={() => setScheduleModalOpen(true)}
       />
 
-      {/* 3. Próximo Programa / Ahora */}
+      {/* 3. Último Programa Destacado */}
       <NextProgram
         onWatchLive={handleOpenLive}
         onViewSchedule={() => setScheduleModalOpen(true)}
       />
 
-      {/* 4. Último Episodio & Episodios Anteriores */}
+      {/* 4. Contenido del Canal & Episodios Reales */}
       <LatestEpisode
         onPlayEpisode={handlePlayEpisode}
       />
@@ -87,10 +112,10 @@ export const App: React.FC = () => {
       {/* 8. Nosotros / Manifiesto */}
       <AboutSection />
 
-      {/* 8. Contacto / Pedidos de Oración */}
+      {/* 9. Contacto / Pedidos de Oración */}
       <ContactSection />
 
-      {/* 9. Footer */}
+      {/* 10. Footer */}
       <Footer />
 
       {/* Interactive Modals */}
@@ -117,7 +142,18 @@ export const App: React.FC = () => {
         onWatchLive={handleOpenLive}
       />
 
+      {/* Admin Panel Modal */}
+      <AdminPanelModal />
+
     </div>
+  );
+};
+
+export const App: React.FC = () => {
+  return (
+    <AdminProvider>
+      <AppContent />
+    </AdminProvider>
   );
 };
 

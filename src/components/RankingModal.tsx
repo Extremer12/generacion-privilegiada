@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { X, Trophy, History, Award } from 'lucide-react';
-import { RANKING_2026 } from '../data/gpData';
+import { useAdmin } from '../context/AdminContext';
 
 interface RankingModalProps {
   isOpen: boolean;
@@ -8,6 +8,7 @@ interface RankingModalProps {
 }
 
 export const RankingModal: React.FC<RankingModalProps> = ({ isOpen, onClose }) => {
+  const { ranking } = useAdmin();
   const [selectedYear, setSelectedYear] = useState<'2026' | '2025'>('2026');
   const [activeTab, setActiveTab] = useState<'tabla' | 'historial'>('tabla');
 
@@ -135,7 +136,7 @@ export const RankingModal: React.FC<RankingModalProps> = ({ isOpen, onClose }) =
           
           {activeTab === 'tabla' ? (
             <div className="space-y-2.5">
-              {RANKING_2026.map((user) => {
+              {ranking.map((user) => {
                 const isFirst = user.rank === 1;
                 return (
                   <div

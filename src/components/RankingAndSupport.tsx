@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, Heart, Wifi, Video, Sparkles, Film, Award, Wrench } from 'lucide-react';
-import { RANKING_2026, GP_CONFIG } from '../data/gpData';
+import { useAdmin } from '../context/AdminContext';
 
 interface RankingAndSupportProps {
   onOpenSupportModal: () => void;
@@ -13,16 +13,32 @@ export const RankingAndSupport: React.FC<RankingAndSupportProps> = ({
   onViewFullRanking,
   onViewAllGoals,
 }) => {
-  const { funding } = GP_CONFIG;
+  const { ranking, funding, goals } = useAdmin();
 
-  const goalsList = [
-    { title: "Internet", icon: Wifi },
-    { title: "Equipamiento", icon: Video },
-    { title: "Iluminación", icon: Sparkles },
-    { title: "Producción", icon: Film },
-    { title: "Premios", icon: Award },
-    { title: "Mantenimiento", icon: Wrench },
-  ];
+  const getIconForGoal = (iconName: string) => {
+    switch (iconName.toLowerCase()) {
+      case 'wifi':
+      case 'internet':
+        return Wifi;
+      case 'video':
+      case 'camera':
+      case 'equipamiento':
+        return Video;
+      case 'sun':
+      case 'iluminación':
+        return Sparkles;
+      case 'film':
+      case 'layers':
+      case 'producción':
+        return Film;
+      case 'trophy':
+      case 'award':
+      case 'premios':
+        return Award;
+      default:
+        return Wrench;
+    }
+  };
 
   return (
     <section id="ranking" className="relative py-16 sm:py-24 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,7 +64,7 @@ export const RankingAndSupport: React.FC<RankingAndSupportProps> = ({
 
             {/* List */}
             <div className="space-y-3">
-              {RANKING_2026.map((user) => {
+              {ranking.slice(0, 5).map((user) => {
                 const isFirst = user.rank === 1;
                 return (
                   <div
@@ -176,8 +192,8 @@ export const RankingAndSupport: React.FC<RankingAndSupportProps> = ({
             </h3>
 
             <div className="space-y-4">
-              {goalsList.map((item, idx) => {
-                const Icon = item.icon;
+              {goals.map((item, idx) => {
+                const Icon = getIconForGoal(item.iconName || item.title);
                 return (
                   <div key={idx} className="flex items-center gap-3.5 group">
                     <div className="w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.08] flex items-center justify-center text-[#C9A45C] group-hover:border-[#C9A45C]/50 transition-colors">

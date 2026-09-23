@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Play, Calendar, Clock, Eye, ExternalLink, Sparkles } from 'lucide-react';
-import { LATEST_EPISODE, ALL_CHANNEL_EPISODES } from '../data/gpData';
+import { Play, Calendar, Clock, Eye, ExternalLink } from 'lucide-react';
+import { ALL_CHANNEL_EPISODES } from '../data/gpData';
 import { Episode } from '../types';
 
 interface LatestEpisodeProps {
@@ -22,8 +22,7 @@ export const LatestEpisode: React.FC<LatestEpisodeProps> = ({ onPlayEpisode }) =
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-white/[0.06] gap-4">
         <div>
-          <div className="flex items-center gap-2 mb-2 text-[#C9A45C] text-xs font-bold tracking-widest uppercase">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="mb-2 text-[#C9A45C] text-xs font-bold tracking-widest uppercase">
             <span>TRANSMISIONES & EPISODIOS REALES</span>
           </div>
           <h2 className="font-akira text-2xl sm:text-3xl lg:text-4xl font-black tracking-wider text-[#F4F5F7] uppercase">
@@ -42,99 +41,7 @@ export const LatestEpisode: React.FC<LatestEpisodeProps> = ({ onPlayEpisode }) =
         </a>
       </div>
 
-      {/* 1. Featured Latest Broadcast Banner */}
-      <div className="mb-14 rounded-3xl border border-white/[0.08] bg-gradient-to-r from-[#0C121B] via-[#0E1622] to-[#0C121B] p-5 sm:p-7 shadow-2xl overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#C9A45C]/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center relative z-10">
-          {/* Main Video Thumbnail */}
-          <div
-            onClick={() => onPlayEpisode(LATEST_EPISODE)}
-            className="lg:col-span-7 relative rounded-2xl overflow-hidden aspect-video group cursor-pointer border border-white/[0.1] shadow-2xl transition-all duration-300 hover:border-[#C9A45C]/50"
-          >
-            <img
-              src={LATEST_EPISODE.thumbnail}
-              alt={LATEST_EPISODE.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#070A0F]/80 backdrop-blur-md border border-[#C9A45C]/70 flex items-center justify-center text-[#C9A45C] group-hover:bg-[#C9A45C] group-hover:text-[#070A0F] group-hover:scale-110 transition-all duration-300 shadow-[0_0_30px_rgba(201,164,92,0.4)]">
-                <Play className="w-7 h-7 sm:w-8 sm:h-8 fill-current ml-1" />
-              </div>
-            </div>
-
-            {/* Top Badge */}
-            <div className="absolute top-3.5 left-3.5 flex items-center gap-2">
-              <span className="px-3 py-1 rounded-full bg-[#C9A45C] text-[#070A0F] font-akira text-[10px] font-black tracking-wider uppercase shadow-md">
-                ÚLTIMA TRANSMISIÓN
-              </span>
-            </div>
-
-            {/* Bottom Info Stamp */}
-            <div className="absolute bottom-3.5 right-3.5 flex items-center gap-2">
-              {LATEST_EPISODE.views && (
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 backdrop-blur-sm border border-white/10 text-[11px] font-mono text-white/90">
-                  <Eye className="w-3 h-3 text-[#C9A45C]" />
-                  <span>{LATEST_EPISODE.views}</span>
-                </div>
-              )}
-              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/80 backdrop-blur-sm border border-white/10 text-[11px] font-mono text-white/90">
-                <Clock className="w-3 h-3 text-[#C9A45C]" />
-                <span>{LATEST_EPISODE.duration}</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Featured Details */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <span className="text-xs font-bold text-[#C9A45C] tracking-widest uppercase mb-2">
-              {LATEST_EPISODE.program}
-            </span>
-
-            <h3 className="font-akira text-xl sm:text-2xl font-black tracking-wide text-[#F4F5F7] mb-3 leading-snug">
-              {LATEST_EPISODE.title}
-            </h3>
-
-            <p className="flex items-center gap-3 text-xs text-[#AEB6C2] font-medium mb-4">
-              <span className="flex items-center gap-1.5">
-                <Calendar className="w-3.5 h-3.5 text-[#C9A45C]" />
-                {LATEST_EPISODE.date}
-              </span>
-              <span className="text-white/20">•</span>
-              <span>{LATEST_EPISODE.duration}</span>
-            </p>
-
-            <p className="text-xs sm:text-sm text-[#AEB6C2] leading-relaxed mb-6">
-              {LATEST_EPISODE.description}
-            </p>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <button
-                onClick={() => onPlayEpisode(LATEST_EPISODE)}
-                className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] font-bold text-xs tracking-wider uppercase transition-all duration-200 shadow-lg hover:shadow-[0_0_25px_rgba(201,164,92,0.4)]"
-              >
-                <Play className="w-4 h-4 fill-[#070A0F] stroke-none" />
-                <span>REPRODUCIR AHORA</span>
-              </button>
-
-              <a
-                href={`https://www.youtube.com/watch?v=${LATEST_EPISODE.youtubeId}`}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/10 text-xs font-bold text-white tracking-wider uppercase transition-all duration-200"
-              >
-                <span>VER EN YOUTUBE</span>
-                <ExternalLink className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Category Filter Tabs */}
+      {/* Category Filter Tabs */}
       <div className="flex flex-wrap items-center gap-2.5 mb-8">
         {[
           { key: 'todos', label: 'TODOS LOS VIDEOS' },

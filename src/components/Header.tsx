@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { GpLogo } from './GpLogo';
-import { Menu, X as CloseIcon } from 'lucide-react';
-
+import { Menu, X as CloseIcon, ShieldCheck } from 'lucide-react';
+import { useAdmin } from '../context/AdminContext';
 
 export const Header: React.FC = () => {
+  const { setIsAdminOpen } = useAdmin();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeNav, setActiveNav] = useState('inicio');
@@ -18,7 +19,7 @@ export const Header: React.FC = () => {
 
   const navItems = [
     { id: 'inicio', label: 'INICIO', href: '#inicio' },
-    { id: 'programas', label: 'PROGRAMAS', href: '#proximo-programa' },
+    { id: 'programas', label: 'PROGRAMAS', href: '#ultimo-programa' },
     { id: 'ranking', label: 'RANKING', href: '#ranking' },
     { id: 'conductores', label: 'CONDUCTORES', href: '#conductores' },
     { id: 'patrocinadores', label: 'PATROCINADORES', href: '#patrocinadores' },
@@ -65,10 +66,27 @@ export const Header: React.FC = () => {
             })}
           </nav>
 
-
+          {/* Desktop Admin Trigger */}
+          <div className="hidden lg:flex items-center">
+            <button
+              onClick={() => setIsAdminOpen(true)}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] hover:bg-[#C9A45C]/15 border border-white/10 hover:border-[#C9A45C]/40 text-[#AEB6C2] hover:text-[#C9A45C] text-xs font-bold uppercase tracking-wider transition-all duration-200"
+              title="Abrir Panel Administrativo (Ctrl+Shift+A)"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span>ADMIN</span>
+            </button>
+          </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-3">
+          <div className="flex lg:hidden items-center gap-3">
+            <button
+              onClick={() => setIsAdminOpen(true)}
+              className="p-1.5 text-[#C9A45C]"
+              title="Panel Admin"
+            >
+              <ShieldCheck className="w-5 h-5" />
+            </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-[#F4F5F7] p-1.5 focus:outline-none"
@@ -81,7 +99,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden mt-4 pt-4 border-t border-white/[0.08] flex flex-col gap-3.5 pb-3">
+          <div className="lg:hidden mt-4 pt-4 border-t border-white/[0.08] flex flex-col gap-3.5 pb-3">
             {navItems.map((item) => (
               <a
                 key={item.id}
@@ -97,7 +115,6 @@ export const Header: React.FC = () => {
                 {item.label}
               </a>
             ))}
-
           </div>
         )}
       </div>
