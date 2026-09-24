@@ -56,7 +56,7 @@ export const Hero: React.FC<HeroProps> = ({ onWatchLatest, onViewSchedule }) => 
             {/* Primary Gold Button */}
             <button
               onClick={onWatchLatest}
-              className="group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(201,164,92,0.35)] hover:shadow-[0_0_30px_rgba(201,164,92,0.5)] transform hover:-translate-y-0.5 active:translate-y-0"
+              className="btn-shimmer group inline-flex items-center gap-2.5 px-6 sm:px-8 py-3.5 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_0_20px_rgba(201,164,92,0.35)] hover:shadow-[0_0_30px_rgba(201,164,92,0.5)] transform hover:-translate-y-0.5 active:translate-y-0"
             >
               <Play className="w-4 h-4 fill-[#070A0F] stroke-none" />
               <span>VER ÚLTIMO PROGRAMA</span>

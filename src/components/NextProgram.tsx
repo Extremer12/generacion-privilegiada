@@ -14,7 +14,7 @@ export const NextProgram: React.FC<NextProgramProps> = ({ onWatchLive, onViewSch
   const nextConfig = GP_CONFIG.nextLive;
 
   return (
-    <section id="ultimo-programa" className="relative z-20 -mt-8 sm:-mt-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ultimo-programa" className="reveal-on-scroll relative z-20 -mt-8 sm:-mt-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header Tag */}
       <div className="flex items-center gap-2 mb-3 text-[#C9A45C] text-xs font-bold tracking-widest uppercase">
         <Calendar className="w-3.5 h-3.5" />

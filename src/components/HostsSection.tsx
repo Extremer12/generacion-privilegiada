@@ -10,7 +10,7 @@ interface HostsSectionProps {
 export const HostsSection: React.FC<HostsSectionProps> = ({ onViewAll }) => {
   const { hosts } = useAdmin();
   return (
-    <section id="conductores" className="relative py-16 sm:py-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="conductores" className="reveal-on-scroll relative py-16 sm:py-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
       <div className="flex items-center justify-between mb-8">
         <h2 className="font-akira text-xl sm:text-2xl font-black tracking-wider text-[#F4F5F7] uppercase">

@@ -1,9 +1,9 @@
 import React from 'react';
-import { ArrowRight, Sparkles, TrendingUp, Tv, Users } from 'lucide-react';
+import { ArrowRight, TrendingUp, Tv, Users } from 'lucide-react';
 
 export const SponsorsSection: React.FC = () => {
   return (
-    <section id="patrocinadores" className="relative py-20 sm:py-28 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/[0.08]">
+    <section id="patrocinadores" className="reveal-on-scroll relative py-20 sm:py-28 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 border-t border-white/[0.08]">
       
       {/* Background Ambient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-80 bg-[#C9A45C]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -15,8 +15,7 @@ export const SponsorsSection: React.FC = () => {
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[2px] bg-gradient-to-r from-transparent via-[#C9A45C] to-transparent" />
 
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C9A45C]/10 border border-[#C9A45C]/25 text-[#C9A45C] text-[11px] font-bold uppercase tracking-widest mb-6">
-          <Sparkles className="w-3.5 h-3.5" />
+        <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#C9A45C]/10 border border-[#C9A45C]/25 text-[#C9A45C] text-[11px] font-bold uppercase tracking-widest mb-6">
           <span>PROGRAMA DE ALIANZAS & SPONSORS</span>
         </div>
 

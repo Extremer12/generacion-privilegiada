@@ -20,6 +20,10 @@
     --color-gp-gold-light: #E4C77A;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: #070A0F;
     color: #F4F5F7;
@@ -236,5 +240,82 @@
     opacity: 0;
     transform: translateY(-2px);
   }
+}
+
+/* =========================================================
+   SCROLL REVEAL & EDITORIAL MICRO-ANIMATIONS
+   ========================================================= */
+
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(28px) scale(0.99);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Stagger delays for child items */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-400 { transition-delay: 400ms; }
+.delay-500 { transition-delay: 500ms; }
+
+/* Interactive Hover Lift & Glow */
+.card-hover-effect {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  border-color: rgba(201, 164, 92, 0.45);
+  box-shadow: 0 16px 36px -12px rgba(201, 164, 92, 0.18);
+}
+
+/* Atmospheric breathing glow */
+@keyframes ambientBreathe {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+.ambient-glow-pulse {
+  animation: ambientBreathe 9s ease-in-out infinite;
+}
+
+/* Smooth button shimmer */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  transition: all 0.7s ease;
+}
+
+.btn-shimmer:hover::after {
+  left: 140%;
 }
 

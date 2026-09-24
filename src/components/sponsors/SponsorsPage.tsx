@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowLeft,
   Tv,
   Users,
   TrendingUp,
-  Sparkles,
+  Heart,
   CheckCircle2,
   Send,
   MessageCircle,
@@ -21,6 +21,10 @@ interface SponsorsPageProps {
 }
 
 export const SponsorsPage: React.FC<SponsorsPageProps> = ({ onBackToSite }) => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, []);
+
   const [selectedPlan, setSelectedPlan] = useState<string>('oficial');
   const [formData, setFormData] = useState({
     empresa: '',
@@ -119,8 +123,7 @@ export const SponsorsPage: React.FC<SponsorsPageProps> = ({ onBackToSite }) => {
         
         {/* Hero Section */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#C9A45C]/10 border border-[#C9A45C]/30 text-[#C9A45C] text-xs font-bold uppercase tracking-widest mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#C9A45C]/10 border border-[#C9A45C]/30 text-[#C9A45C] text-xs font-bold uppercase tracking-widest mb-6">
             <span>ALIANZAS COMERCIALES GP</span>
           </div>
           
@@ -153,7 +156,7 @@ export const SponsorsPage: React.FC<SponsorsPageProps> = ({ onBackToSite }) => {
               desc: "Tu marca presente en los reels de Instagram y TikTok con links directos a tu negocio.",
             },
             {
-              icon: Sparkles,
+              icon: Heart,
               title: "Comunidad Fiel",
               desc: "Una audiencia activa y comprometida que valora y apoya a las marcas que acompañan al programa.",
             },

@@ -41,7 +41,7 @@ export const RankingAndSupport: React.FC<RankingAndSupportProps> = ({
   };
 
   return (
-    <section id="ranking" className="relative py-16 sm:py-24 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="ranking" className="reveal-on-scroll relative py-16 sm:py-24 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
         
         {/* Left Column: Ranking Anual (Span 4) */}

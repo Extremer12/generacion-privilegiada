@@ -20,6 +20,8 @@ import { AdminProvider } from './context/AdminContext';
 import { LATEST_EPISODE } from './data/gpData';
 import { Episode } from './types';
 
+import { useScrollAnimation } from './hooks/useScrollAnimation';
+
 const checkIsAdminRoute = (): boolean => {
   if (typeof window === 'undefined') return false;
   const path = window.location.pathname.toLowerCase();
@@ -50,10 +52,24 @@ const AppContent: React.FC = () => {
   const [isAdminRoute, setIsAdminRoute] = useState<boolean>(checkIsAdminRoute);
   const [isSponsorsRoute, setIsSponsorsRoute] = useState<boolean>(checkIsSponsorsRoute);
 
+  // Activate scroll-driven reveal animations across the site
+  useScrollAnimation();
+
   useEffect(() => {
+    // Initial scroll reset if loading into a subroute
+    if (checkIsAdminRoute() || checkIsSponsorsRoute()) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }
+
     const handleLocationChange = () => {
-      setIsAdminRoute(checkIsAdminRoute());
-      setIsSponsorsRoute(checkIsSponsorsRoute());
+      const admin = checkIsAdminRoute();
+      const sponsors = checkIsSponsorsRoute();
+      setIsAdminRoute(admin);
+      setIsSponsorsRoute(sponsors);
+
+      if (admin || sponsors) {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      }
     };
 
     window.addEventListener('popstate', handleLocationChange);
@@ -74,6 +90,7 @@ const AppContent: React.FC = () => {
     }
     setIsAdminRoute(false);
     setIsSponsorsRoute(false);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   };
 
   // Modals state for public website

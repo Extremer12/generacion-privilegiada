@@ -6,7 +6,7 @@ export const AboutSection: React.FC = () => {
   const { about } = useAdmin();
 
   return (
-    <section id="nosotros" className="relative py-20 sm:py-28 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="nosotros" className="reveal-on-scroll relative py-20 sm:py-28 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Decorative subtle line */}
       <div className="w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-16" />
 

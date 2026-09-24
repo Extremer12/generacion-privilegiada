@@ -18,7 +18,7 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <section id="contacto" className="relative py-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contacto" className="reveal-on-scroll relative py-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="max-w-3xl mx-auto rounded-3xl bg-[#0C121B] border border-white/[0.08] p-6 sm:p-10 shadow-2xl relative overflow-hidden">
         
         {/* Subtle background glow */}

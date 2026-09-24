@@ -18,7 +18,7 @@ export const LatestEpisode: React.FC<LatestEpisodeProps> = ({ onPlayEpisode }) =
   });
 
   return (
-    <section id="programas" className="relative py-16 sm:py-24 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="programas" className="reveal-on-scroll relative py-16 sm:py-24 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
       {/* Section Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 pb-4 border-b border-white/[0.06] gap-4">
         <div>
