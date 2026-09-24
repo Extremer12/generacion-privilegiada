@@ -1,23 +1,7 @@
-import React, { useState } from 'react';
-import { Sparkles, TrendingUp, Users, Tv, CheckCircle2, Send, ArrowRight, ShieldCheck } from 'lucide-react';
+import React from 'react';
+import { Sparkles, TrendingUp, Users, Tv, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const SponsorsSection: React.FC = () => {
-  const [formData, setFormData] = useState({
-    empresa: '',
-    contacto: '',
-    email: '',
-    telefono: '',
-    tipoAlianza: 'oficial',
-    mensaje: '',
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.empresa || !formData.email) return;
-    setSubmitted(true);
-  };
-
   const benefits = [
     {
       icon: Tv,
@@ -156,7 +140,7 @@ export const SponsorsSection: React.FC = () => {
       </div>
 
       {/* Sponsorship Modalities Cards */}
-      <div className="mb-20 relative z-10">
+      <div className="mb-16 relative z-10">
         <div className="text-center mb-10">
           <h3 className="font-akira text-lg sm:text-xl font-bold text-white uppercase tracking-wider">
             MODALIDADES DE PATROCINIO
@@ -207,7 +191,7 @@ export const SponsorsSection: React.FC = () => {
 
               <div className="mt-8 pt-4 border-t border-white/[0.06]">
                 <a
-                  href="#formulario-patrocinio"
+                  href="#/patrocinadores"
                   className={`w-full inline-flex items-center justify-center gap-2 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition-colors ${
                     tier.popular
                       ? 'bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F]'
@@ -223,137 +207,26 @@ export const SponsorsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Sponsor Application Form */}
-      <div id="formulario-patrocinio" className="max-w-2xl mx-auto rounded-3xl bg-[#0C121B] border border-white/[0.08] p-6 sm:p-10 shadow-2xl relative z-10">
-        <div className="text-center mb-8">
-          <span className="text-xs font-semibold tracking-[0.25em] text-[#C9A45C] uppercase block mb-2">
-            PROPUESTA COMERCIAL
-          </span>
-          <h3 className="font-akira text-xl sm:text-2xl font-black text-white uppercase tracking-wider mb-2">
-            CONVERSEMOS CON TU MARCA
-          </h3>
-          <p className="text-xs text-[#AEB6C2]">
-            Completá este formulario y nuestro equipo de producción se comunicará para armar una propuesta a medida.
-          </p>
+      {/* Full-Screen Portal Banner Callout */}
+      <div className="max-w-3xl mx-auto rounded-3xl bg-gradient-to-b from-[#111A25] to-[#0C121B] border border-[#C9A45C]/30 p-8 sm:p-12 text-center shadow-2xl relative z-10">
+        <span className="text-xs font-semibold tracking-[0.25em] text-[#C9A45C] uppercase block mb-3">
+          ESPACIO DEDICADO A PANTALLA COMPLETA
+        </span>
+        <h3 className="font-akira text-xl sm:text-2xl font-black text-white uppercase tracking-wider mb-3">
+          ¿QUERÉS ANUNCIAR EN GP?
+        </h3>
+        <p className="text-xs sm:text-sm text-[#AEB6C2] max-w-xl mx-auto mb-8 leading-relaxed">
+          Accedé a nuestro portal exclusivo para sponsors. Una experiencia simple, clara y directa para coordinar tu presencia en vivo y en redes sin vueltas.
+        </p>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            href="#/patrocinadores"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] font-bold text-xs uppercase tracking-wider transition-all shadow-[0_0_25px_rgba(201,164,92,0.3)] hover:shadow-[0_0_35px_rgba(201,164,92,0.5)]"
+          >
+            <span>INGRESAR AL PORTAL DE PATROCINADORES</span>
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
-
-        {submitted ? (
-          <div className="p-8 rounded-2xl bg-[#111A25] border border-[#C9A45C]/30 text-center">
-            <ShieldCheck className="w-12 h-12 text-[#C9A45C] mx-auto mb-3" />
-            <h4 className="font-akira text-sm font-bold text-white mb-2 uppercase">
-              PROPUESTA ENVIADA CON ÉXITO
-            </h4>
-            <p className="text-xs text-[#AEB6C2] mb-6">
-              Recibimos los datos de <strong>{formData.empresa}</strong>. Nos contactaremos en menos de 24 horas hábiles.
-            </p>
-            <button
-              onClick={() => {
-                setSubmitted(false);
-                setFormData({ empresa: '', contacto: '', email: '', telefono: '', tipoAlianza: 'oficial', mensaje: '' });
-              }}
-              className="px-6 py-2 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white uppercase tracking-wider transition-colors"
-            >
-              Enviar otra consulta
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                  EMPRESA O MARCA *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Nombre de tu marca"
-                  value={formData.empresa}
-                  onChange={(e) => setFormData({ ...formData, empresa: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white placeholder-[#AEB6C2]/40"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                  PERSONA DE CONTACTO
-                </label>
-                <input
-                  type="text"
-                  placeholder="Tu nombre y cargo"
-                  value={formData.contacto}
-                  onChange={(e) => setFormData({ ...formData, contacto: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white placeholder-[#AEB6C2]/40"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                  EMAIL CORPORATIVO *
-                </label>
-                <input
-                  type="email"
-                  required
-                  placeholder="contacto@marca.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white placeholder-[#AEB6C2]/40"
-                />
-              </div>
-
-              <div>
-                <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                  TELÉFONO / WHATSAPP
-                </label>
-                <input
-                  type="tel"
-                  placeholder="+54 9 11 ..."
-                  value={formData.telefono}
-                  onChange={(e) => setFormData({ ...formData, telefono: e.target.value })}
-                  className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white placeholder-[#AEB6C2]/40"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                MODALIDAD DE INTERÉS
-              </label>
-              <select
-                value={formData.tipoAlianza}
-                onChange={(e) => setFormData({ ...formData, tipoAlianza: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white"
-              >
-                <option value="oficial">Sponsor Oficial de Transmisión</option>
-                <option value="segmento">Sponsor de Segmento / Bloque</option>
-                <option value="partner">Partner Estratégico 360°</option>
-                <option value="otro">Propuesta especial / Personalizada</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-[11px] font-bold tracking-wider text-[#AEB6C2] uppercase mb-1.5">
-                COMENTARIOS O EXPECTATIVAS
-              </label>
-              <textarea
-                rows={3}
-                placeholder="Contanos qué productos o servicios comercializan y qué buscan lograr con la alianza..."
-                value={formData.mensaje}
-                onChange={(e) => setFormData({ ...formData, mensaje: e.target.value })}
-                className="w-full px-4 py-3 rounded-xl bg-[#111A25] border border-white/[0.08] focus:border-[#C9A45C] focus:outline-none text-xs sm:text-sm text-white placeholder-[#AEB6C2]/40 resize-none"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full bg-[#C9A45C] hover:bg-[#E4C77A] text-[#070A0F] font-bold text-xs tracking-wider uppercase transition-all shadow-[0_0_20px_rgba(201,164,92,0.3)]"
-            >
-              <Send className="w-3.5 h-3.5" />
-              <span>ENVIAR SOLICITUD DE PATROCINIO</span>
-            </button>
-          </form>
-        )}
       </div>
 
     </section>

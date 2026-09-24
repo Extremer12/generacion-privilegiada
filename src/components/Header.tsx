@@ -20,7 +20,7 @@ export const Header: React.FC = () => {
     { id: 'programas', label: 'PROGRAMAS', href: '#ultimo-programa' },
     { id: 'ranking', label: 'RANKING', href: '#ranking' },
     { id: 'conductores', label: 'CONDUCTORES', href: '#conductores' },
-    { id: 'patrocinadores', label: 'PATROCINADORES', href: '#patrocinadores' },
+    { id: 'patrocinadores', label: 'PATROCINADORES', href: '#/patrocinadores' },
     { id: 'nosotros', label: 'NOSOTROS', href: '#nosotros' },
     { id: 'apoyanos', label: 'APÓYANOS', href: '#apoyanos' },
     { id: 'contacto', label: 'CONTACTO', href: '#contacto' },

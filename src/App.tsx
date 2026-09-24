@@ -15,6 +15,7 @@ import { RankingModal } from './components/RankingModal';
 import { ScheduleModal } from './components/ScheduleModal';
 import { GpLoader } from './components/GpLoader';
 import { AdminPage } from './components/admin/AdminPage';
+import { SponsorsPage } from './components/sponsors/SponsorsPage';
 import { AdminProvider } from './context/AdminContext';
 import { LATEST_EPISODE } from './data/gpData';
 import { Episode } from './types';
@@ -32,12 +33,27 @@ const checkIsAdminRoute = (): boolean => {
   );
 };
 
+const checkIsSponsorsRoute = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  return (
+    path === '/patrocinadores' ||
+    path.startsWith('/patrocinadores/') ||
+    hash === '#/patrocinadores' ||
+    hash === '#patrocinadores' ||
+    hash.startsWith('#/patrocinadores')
+  );
+};
+
 const AppContent: React.FC = () => {
   const [isAdminRoute, setIsAdminRoute] = useState<boolean>(checkIsAdminRoute);
+  const [isSponsorsRoute, setIsSponsorsRoute] = useState<boolean>(checkIsSponsorsRoute);
 
   useEffect(() => {
     const handleLocationChange = () => {
       setIsAdminRoute(checkIsAdminRoute());
+      setIsSponsorsRoute(checkIsSponsorsRoute());
     };
 
     window.addEventListener('popstate', handleLocationChange);
@@ -57,6 +73,7 @@ const AppContent: React.FC = () => {
       window.history.pushState({}, '', window.location.pathname);
     }
     setIsAdminRoute(false);
+    setIsSponsorsRoute(false);
   };
 
   // Modals state for public website
@@ -89,6 +106,11 @@ const AppContent: React.FC = () => {
   // If in Admin route, render Fullscreen Admin Dashboard / Login
   if (isAdminRoute) {
     return <AdminPage onBackToSite={handleBackToSite} />;
+  }
+
+  // If in Sponsors route, render Fullscreen Dedicated Sponsors Experience
+  if (isSponsorsRoute) {
+    return <SponsorsPage onBackToSite={handleBackToSite} />;
   }
 
   // Otherwise, render Public Website
