@@ -23,6 +23,8 @@ export const GP_CONFIG = {
     youtube: "https://www.youtube.com/@GeneracionPrivilegiada",
     instagram: "https://www.instagram.com/generacionprivilegiada1",
     tiktok: "https://www.tiktok.com/@generacionprivilegiada",
+    whatsapp: "https://wa.me/5492644774742",
+    whatsappDisplay: "+54 9 264 477 4742",
   },
   funding: {
     current: 87500,

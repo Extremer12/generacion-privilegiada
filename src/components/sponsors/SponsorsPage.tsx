@@ -87,7 +87,7 @@ export const SponsorsPage: React.FC<SponsorsPageProps> = ({ onBackToSite }) => {
     const text = encodeURIComponent(
       `Hola equipo de Generación Privilegiada! Nos interesa sumar nuestra marca/empresa (${formData.empresa || 'Empresa'}) como Sponsor en el plan ${selectedPlan.toUpperCase()}. ¿Podemos coordinar una propuesta?`
     );
-    return `https://wa.me/5491123456789?text=${text}`;
+    return `https://wa.me/5492644774742?text=${text}`;
   };
 
   return (
