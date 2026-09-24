@@ -25,6 +25,7 @@ export const GP_CONFIG = {
     tiktok: "https://www.tiktok.com/@generacionprivilegiada",
     whatsapp: "https://wa.me/5492644774742",
     whatsappDisplay: "+54 9 264 477 4742",
+    email: "zioncode25@gmail.com",
   },
   funding: {
     current: 87500,
