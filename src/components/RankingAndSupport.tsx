@@ -179,8 +179,9 @@ export const RankingAndSupport: React.FC<RankingAndSupportProps> = ({
             </div>
           </div>
 
-          <div className="relative z-10 mt-6 pt-3 text-[11px] text-[#AEB6C2]/60">
-            Transparencia total en el destino de cada aporte mensual.
+          <div className="relative z-10 mt-6 pt-3 text-[11px] text-[#AEB6C2]/60 flex flex-wrap items-center justify-between gap-2 border-t border-white/[0.04]">
+            <span>Aportes en 1 clic vía Mercado Pago o transferencia bancaria.</span>
+            <span className="text-[#009EE3] font-bold">Mercado Pago ✓</span>
           </div>
         </div>
 

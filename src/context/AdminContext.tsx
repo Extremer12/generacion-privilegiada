@@ -27,6 +27,10 @@ export interface FundingConfig {
   percentage: number;
   formattedCurrent: string;
   formattedTarget: string;
+  mercadoPagoLink: string;
+  alias: string;
+  cbu: string;
+  holderName: string;
 }
 
 export const DEFAULT_ABOUT: AboutConfig = {
@@ -52,7 +56,14 @@ interface AdminContextType {
   updateHosts: (hosts: Host[]) => void;
   updateRanking: (ranking: RankingUser[]) => void;
   updateGoals: (goals: SupportGoal[]) => void;
-  updateFunding: (current: number, target: number) => void;
+  updateFunding: (
+    current: number,
+    target: number,
+    mercadoPagoLink?: string,
+    alias?: string,
+    cbu?: string,
+    holderName?: string
+  ) => void;
   updateAbout: (about: Partial<AboutConfig>) => void;
   resetAllToDefaults: () => void;
 }
@@ -104,6 +115,10 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       percentage: Math.min(100, Math.round((current / target) * 100)),
       formattedCurrent: `$${current.toLocaleString('es-AR')}`,
       formattedTarget: `$${target.toLocaleString('es-AR')}`,
+      mercadoPagoLink: "https://link.mercadopago.com.ar/generacionprivilegiada",
+      alias: "GP.STREAMING.OFICIAL",
+      cbu: "0000003100084729104820",
+      holderName: "Generación Privilegiada Producciones",
     };
   });
 
@@ -131,7 +146,14 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem(`${STORAGE_KEY}_goals`, JSON.stringify(newGoals));
   };
 
-  const updateFunding = (current: number, target: number) => {
+  const updateFunding = (
+    current: number,
+    target: number,
+    mercadoPagoLink?: string,
+    alias?: string,
+    cbu?: string,
+    holderName?: string
+  ) => {
     const safeTarget = target > 0 ? target : 1;
     const percentage = Math.min(100, Math.round((current / safeTarget) * 100));
     const newFunding: FundingConfig = {
@@ -140,6 +162,10 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       percentage,
       formattedCurrent: `$${current.toLocaleString('es-AR')}`,
       formattedTarget: `$${safeTarget.toLocaleString('es-AR')}`,
+      mercadoPagoLink: mercadoPagoLink ?? funding.mercadoPagoLink ?? "https://link.mercadopago.com.ar/generacionprivilegiada",
+      alias: alias ?? funding.alias ?? "GP.STREAMING.OFICIAL",
+      cbu: cbu ?? funding.cbu ?? "0000003100084729104820",
+      holderName: holderName ?? funding.holderName ?? "Generación Privilegiada Producciones",
     };
     setFunding(newFunding);
     localStorage.setItem(`${STORAGE_KEY}_funding`, JSON.stringify(newFunding));
@@ -163,6 +189,10 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       percentage: Math.min(100, Math.round((curr / targ) * 100)),
       formattedCurrent: `$${curr.toLocaleString('es-AR')}`,
       formattedTarget: `$${targ.toLocaleString('es-AR')}`,
+      mercadoPagoLink: "https://link.mercadopago.com.ar/generacionprivilegiada",
+      alias: "GP.STREAMING.OFICIAL",
+      cbu: "0000003100084729104820",
+      holderName: "Generación Privilegiada Producciones",
     });
     setAbout(DEFAULT_ABOUT);
 

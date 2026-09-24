@@ -68,6 +68,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
   // --- TAB 2: Funding State ---
   const [currFund, setCurrFund] = useState(funding.current);
   const [targFund, setTargFund] = useState(funding.target);
+  const [mpLink, setMpLink] = useState(funding.mercadoPagoLink || 'https://link.mercadopago.com.ar/generacionprivilegiada');
+  const [mpAlias, setMpAlias] = useState(funding.alias || 'GP.STREAMING.OFICIAL');
+  const [mpCbu, setMpCbu] = useState(funding.cbu || '0000003100084729104820');
+  const [mpHolder, setMpHolder] = useState(funding.holderName || 'Generación Privilegiada Producciones');
   const [newGoalTitle, setNewGoalTitle] = useState('');
   const [newGoalDesc, setNewGoalDesc] = useState('');
 
@@ -122,6 +126,10 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
   useEffect(() => {
     setCurrFund(funding.current);
     setTargFund(funding.target);
+    setMpLink(funding.mercadoPagoLink || 'https://link.mercadopago.com.ar/generacionprivilegiada');
+    setMpAlias(funding.alias || 'GP.STREAMING.OFICIAL');
+    setMpCbu(funding.cbu || '0000003100084729104820');
+    setMpHolder(funding.holderName || 'Generación Privilegiada Producciones');
   }, [funding]);
 
   useEffect(() => {
@@ -189,7 +197,7 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
   // --- Funding handlers ---
   const handleSaveFunding = (e: React.FormEvent) => {
     e.preventDefault();
-    updateFunding(Number(currFund), Number(targFund));
+    updateFunding(Number(currFund), Number(targFund), mpLink, mpAlias, mpCbu, mpHolder);
     triggerToast();
   };
 
@@ -627,6 +635,59 @@ export const AdminPage: React.FC<AdminPageProps> = ({ onBackToSite }) => {
                         className="w-full px-4 py-3 rounded-xl bg-[#070A0F] border border-white/10 text-white font-mono text-sm focus:outline-none focus:border-[#C9A45C]"
                         required
                       />
+                    </div>
+                  </div>
+
+                  {/* Mercado Pago & Transfer Details */}
+                  <div className="pt-2 border-t border-white/[0.08] space-y-4">
+                    <span className="text-[11px] font-bold text-[#C9A45C] uppercase tracking-wider block">
+                      CONFIGURACIÓN DE MERCADO PAGO Y TRANSFERENCIA
+                    </span>
+
+                    <div>
+                      <label className="block text-[11px] font-bold text-[#AEB6C2] uppercase mb-1.5">
+                        Link de Mercado Pago (link.mercadopago.com.ar o mpago.la)
+                      </label>
+                      <input
+                        type="url"
+                        value={mpLink}
+                        onChange={(e) => setMpLink(e.target.value)}
+                        placeholder="https://link.mercadopago.com.ar/generacionprivilegiada"
+                        className="w-full px-4 py-2.5 rounded-xl bg-[#070A0F] border border-white/10 text-white text-xs focus:outline-none focus:border-[#C9A45C]"
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-[11px] font-bold text-[#AEB6C2] uppercase mb-1.5">Alias (CVU/CBU)</label>
+                        <input
+                          type="text"
+                          value={mpAlias}
+                          onChange={(e) => setMpAlias(e.target.value)}
+                          placeholder="GP.STREAMING.OFICIAL"
+                          className="w-full px-4 py-2.5 rounded-xl bg-[#070A0F] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-[#C9A45C]"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-bold text-[#AEB6C2] uppercase mb-1.5">CBU o CVU</label>
+                        <input
+                          type="text"
+                          value={mpCbu}
+                          onChange={(e) => setMpCbu(e.target.value)}
+                          placeholder="0000003100084729104820"
+                          className="w-full px-4 py-2.5 rounded-xl bg-[#070A0F] border border-white/10 text-white font-mono text-xs focus:outline-none focus:border-[#C9A45C]"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-bold text-[#AEB6C2] uppercase mb-1.5">Nombre del Titular</label>
+                        <input
+                          type="text"
+                          value={mpHolder}
+                          onChange={(e) => setMpHolder(e.target.value)}
+                          placeholder="Generación Privilegiada"
+                          className="w-full px-4 py-2.5 rounded-xl bg-[#070A0F] border border-white/10 text-white text-xs focus:outline-none focus:border-[#C9A45C]"
+                        />
+                      </div>
                     </div>
                   </div>
 
